@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_launcher_background"
+    tools:context="com.arctouch.codechallenge.home.MovieDetailsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingBottom="@dimen/minimum_margin"
+                android:paddingTop="@dimen/minimum_margin">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_launcher_foreground" />
+
+            </RelativeLayout>
+
+            <TextView
+                style="@style/TextViewHighlightedStyle"
+                android:text="@string/movie_name" />
+
+            <TextView
+                style="@style/TextViewStyle"
+                android:id="@+id/textViewMovieName"
+                android:text="Titanic" />
+
+            <TextView
+                style="@style/TextViewHighlightedStyle"
+                android:text="@string/overview" />
+
+            <TextView
+                style="@style/TextViewStyle"
+                android:id="@+id/textViewMovieOverview"
+                android:text="The Titanic is a powerful story of survival, love and heroism. A love story that will never let go of the hearts of the people around the world. Deep on the bottom of the sea, some 3800 meters below the surface of the freezing Atlantic Ocean, lies the wreckage of a ship." />
+
+            <TextView
+                style="@style/TextViewHighlightedStyle"
+                android:text="@string/movie_genres" />
+
+            <TextView
+                style="@style/TextViewStyle"
+                android:id="@+id/textViewMovieGenres"
+                android:text="Drama, Romance, Thriller" />
+
+            <TextView
+                style="@style/TextViewHighlightedStyle"
+                android:text="@string/release_date" />
+
+            <TextView
+                style="@style/TextViewStyle"
+                android:id="@+id/textViewReleaseDate"
+                android:text="19/12/1997" />
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

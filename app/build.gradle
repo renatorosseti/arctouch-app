@@ -51,4 +51,7 @@ dependencies {
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
     implementation "org.jetbrains.anko:anko-design:$anko_version"
     implementation "org.jetbrains.anko:anko-coroutines:$anko_version"
+
+    //Kodein
+    implementation "org.kodein.di:kodein-di-generic-jvm:$kodein_version"
 }

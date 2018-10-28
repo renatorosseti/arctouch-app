@@ -1,4 +1,4 @@
-package com.arctouch.codechallenge.data
+package com.arctouch.codechallenge.repository.data
 
 import com.arctouch.codechallenge.model.Genre
 

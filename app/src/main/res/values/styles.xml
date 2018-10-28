@@ -7,10 +7,10 @@
     </style>
 
     <style name="TextViewStyle">
-        <item name="android:layout_marginStart">@dimen/minimum_margin</item>
         <item name="android:layout_marginTop">@dimen/minimum_margin</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="TextViewHighlightedStyle" parent="TextViewStyle">

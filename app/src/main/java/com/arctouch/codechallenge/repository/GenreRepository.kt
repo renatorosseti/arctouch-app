@@ -3,9 +3,9 @@ package com.arctouch.codechallenge.repository
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
-import com.arctouch.codechallenge.data.Cache
+import com.arctouch.codechallenge.repository.data.Cache
 import com.arctouch.codechallenge.model.GenreResponse
-import com.arctouch.codechallenge.api.TmdbApi
+import com.arctouch.codechallenge.repository.api.TmdbApi
 import retrofit2.Call
 import retrofit2.Response
 

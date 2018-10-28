@@ -11,6 +11,8 @@ class ViewModel(val genreRepository: GenreRepository, val movieRepository: Movie
 
     var currentPage: Long = 0
 
+    var movieDetails = MutableLiveData<Movie>()
+
     override fun onStart() {
 
     }
@@ -19,13 +21,19 @@ class ViewModel(val genreRepository: GenreRepository, val movieRepository: Movie
 
     }
 
-    fun fetchGenres() : LiveData<GenreResponse> {
+    override fun fetchGenres() : LiveData<GenreResponse> {
         return genreRepository.fetchGenres()
     }
 
-    fun fetchMovies() : LiveData<ArrayList<Movie>> {
+    override fun fetchMovies() : LiveData<ArrayList<Movie>> {
         currentPage++
         return movieRepository.fetchMovies(currentPage)
     }
+
+    override fun fetchMovieDetails(movieId: Int) : LiveData<Movie> {
+        return movieRepository.fetchMovieDetails(movieId.toLong())
+    }
+
+
 
 }

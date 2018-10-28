@@ -1,24 +1,17 @@
 package com.arctouch.codechallenge.repository
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
-import com.arctouch.codechallenge.api.TmdbApi
-import com.arctouch.codechallenge.data.Cache
+import com.arctouch.codechallenge.repository.api.TmdbApi
+import com.arctouch.codechallenge.repository.data.Cache
 import com.arctouch.codechallenge.model.Genre
 import com.arctouch.codechallenge.model.GenreResponse
-import com.arctouch.codechallenge.model.Movie
-import com.arctouch.codechallenge.model.UpcomingMoviesResponse
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
-import org.mockito.ArgumentMatchers
 import org.mockito.Mockito
 import retrofit2.mock.Calls
-import org.mockito.ArgumentMatchers.anyString
-import org.mockito.Mockito.*
-import retrofit2.Call
-
 
 class GenreRepositoryTest {
     lateinit var genreRepository: GenreRepository

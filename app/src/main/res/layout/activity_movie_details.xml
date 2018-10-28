@@ -4,8 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_launcher_background"
-    tools:context="com.arctouch.codechallenge.home.MovieDetailsActivity">
+    tools:context=".view.movieDetails.MovieDetailsActivity">
+
+    <ImageView
+        android:id="@+id/imageViewBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:alpha="0.4"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,23 +24,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/minimum_margin">
 
-            <RelativeLayout
-                android:id="@+id/relativeLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingBottom="@dimen/minimum_margin"
-                android:paddingTop="@dimen/minimum_margin">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_launcher_foreground" />
-
-            </RelativeLayout>
+            <ImageView
+                android:id="@+id/posterDetailsImageView"
+                android:layout_height="210dp"
+                android:layout_width="140dp"
+                android:src="@drawable/ic_launcher_foreground" />
 
             <TextView
                 style="@style/TextViewHighlightedStyle"

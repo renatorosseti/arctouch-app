@@ -1,6 +1,6 @@
 package com.arctouch.codechallenge.repository
 
-import com.arctouch.codechallenge.api.TmdbApi
+import com.arctouch.codechallenge.repository.api.TmdbApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -11,8 +11,6 @@ import com.arctouch.codechallenge.model.Movie
 import com.arctouch.codechallenge.model.UpcomingMoviesResponse
 import org.junit.Assert
 import retrofit2.mock.Calls
-
-
 
 class MovieRepositoryTest {
     lateinit var movieRepository: MovieRepository

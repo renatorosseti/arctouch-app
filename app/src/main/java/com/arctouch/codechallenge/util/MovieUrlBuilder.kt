@@ -1,11 +1,11 @@
 package com.arctouch.codechallenge.util
 
-import com.arctouch.codechallenge.api.TmdbApi
+import com.arctouch.codechallenge.repository.api.TmdbApi
 
 private val POSTER_URL = "https://image.tmdb.org/t/p/w154"
 private val BACKDROP_URL = "https://image.tmdb.org/t/p/w780"
 
-class MovieImageUrlBuilder {
+class MovieUrlBuilder {
 
     fun buildPosterUrl(posterPath: String): String {
         return POSTER_URL + posterPath + "?api_key=" + TmdbApi.API_KEY

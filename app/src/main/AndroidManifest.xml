@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".home.HomeActivity"
+            android:name="com.arctouch.codechallenge.view.home.HomeActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:configChanges="orientation|screenSize">
             <intent-filter>
@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".home.MovieDetailsActivity"></activity>
+        <activity android:name="com.arctouch.codechallenge.view.movieDetails.MovieDetailsActivity"></activity>
     </application>
 
 </manifest>

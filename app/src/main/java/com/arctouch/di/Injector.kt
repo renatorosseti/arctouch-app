@@ -3,7 +3,8 @@ package com.arctouch.di
 
 import com.arctouch.codechallenge.repository.GenreRepository
 import com.arctouch.codechallenge.repository.MovieRepository
-import com.arctouch.codechallenge.api.TmdbApi
+import com.arctouch.codechallenge.repository.api.TmdbApi
+import com.arctouch.codechallenge.util.MovieUrlBuilder
 import okhttp3.OkHttpClient
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
@@ -31,6 +32,8 @@ class Injector {
         bind<MovieRepository>() with provider { MovieRepository(instance()) }
 
         bind<ViewModel>() with singleton { ViewModel(instance(),instance()) }
+
+        bind<MovieUrlBuilder>() with provider { MovieUrlBuilder() }
     }
 
 

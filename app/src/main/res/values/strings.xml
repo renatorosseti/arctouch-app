@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Code Challenge</string>
     <string name="movie_and_genres">%s - %s</string>
+    <string name="movie_name">Name</string>
+    <string name="movie_genres">List of genres</string>
+    <string name="overview">Overview</string>
+    <string name="release_date">Release date</string>
+    <string name="action_search">Search by title</string>
+    <string name="progress_message">Please wait...</string>
+    <string name="no_internet">No internet connection available, try again later!</string>
 </resources>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.movieDetails.MovieDetailsActivity">
+
+    <ImageView
+        android:id="@+id/imageViewBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:alpha="0.4"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/minimum_margin">
+
+            <ImageView
+                android:id="@+id/posterDetailsImageView"
+                android:layout_height="210dp"
+                android:layout_width="140dp"
+                android:src="@drawable/ic_launcher_foreground" />
+
+            <TextView
+                style="@style/TextViewHighlightedStyle"
+                android:text="@string/movie_name" />
+
+            <TextView
+                style="@style/TextViewStyle"
+                android:id="@+id/textViewMovieName"
+                android:text="Titanic" />
+
+            <TextView
+                style="@style/TextViewHighlightedStyle"
+                android:text="@string/overview" />
+
+            <TextView
+                style="@style/TextViewStyle"
+                android:id="@+id/textViewMovieOverview"
+                android:text="The Titanic is a powerful story of survival, love and heroism. A love story that will never let go of the hearts of the people around the world. Deep on the bottom of the sea, some 3800 meters below the surface of the freezing Atlantic Ocean, lies the wreckage of a ship." />
+
+            <TextView
+                style="@style/TextViewHighlightedStyle"
+                android:text="@string/movie_genres" />
+
+            <TextView
+                style="@style/TextViewStyle"
+                android:id="@+id/textViewMovieGenres"
+                android:text="Drama, Romance, Thriller" />
+
+            <TextView
+                style="@style/TextViewHighlightedStyle"
+                android:text="@string/release_date" />
+
+            <TextView
+                style="@style/TextViewStyle"
+                android:id="@+id/textViewReleaseDate"
+                android:text="19/12/1997" />
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

@@ -3,28 +3,28 @@ package com.arctouch.codechallenge.view.home
 import android.app.SearchManager
 import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import com.arctouch.application.CodeChallengeApp
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.model.GenreResponse
 import com.arctouch.codechallenge.model.Movie
 import com.arctouch.codechallenge.repository.api.TmdbApi
+import com.arctouch.codechallenge.util.InternetBuilder.Companion.isInternetAvailable
+import com.arctouch.codechallenge.view.ProgressDialog
 import com.arctouch.codechallenge.view.movieDetails.MovieDetailsActivity
 import com.arctouch.codechallenge.viewModel.ViewModel
 import kotlinx.android.synthetic.main.home_activity.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.direct
 import org.kodein.di.generic.instance
-import android.view.Gravity
 
 class HomeActivity : AppCompatActivity(), KodeinAware {
 
@@ -34,7 +34,6 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
     lateinit var linearManager: LinearLayoutManager
     var listMovies : ArrayList<Movie> = ArrayList()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
@@ -42,7 +41,6 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
         kodein = (applicationContext as CodeChallengeApp).kodein
         api = kodein.direct.instance()
         viewModel = kodein.direct.instance()
-
     }
 
     override fun onStart() {
@@ -63,9 +61,7 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
                     var totalItemCount = linearManager.itemCount
                     var pastVisibleItems = linearManager.findFirstCompletelyVisibleItemPosition()
 
-
                     if(pastVisibleItems + visibleItemCount > totalItemCount) {
-                        progressBar.visibility = View.VISIBLE
                         fetchNewMovies()
                     }
                 }
@@ -109,36 +105,51 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun fetchNewMovies() {
-        viewModel.fetchMovies().observe(this, Observer<ArrayList<Movie>> {
-            progressBar.visibility = View.GONE
-            if (it != null) {
-                listMovies.addAll(it)
-                recyclerView.adapter.notifyDataSetChanged()
-            }
-        })
+        if(isInternetAvailable(this)) {
+            ProgressDialog.show(this)
+            viewModel.fetchMovies().observe(this, Observer<ArrayList<Movie>> {
+                ProgressDialog.hide()
+                if (it != null) {
+                    listMovies.addAll(it)
+                    recyclerView.adapter.notifyDataSetChanged()
+                }
+            })
+        } else {
+            toast(R.string.no_internet).show()
+        }
+
     }
 
     private fun loadObservers() {
-        viewModel.fetchGenres().observe(this, Observer<GenreResponse> {
-            fetchNewMovies()
-        })
+        if(isInternetAvailable(this)) {
+            viewModel.fetchGenres().observe(this, Observer<GenreResponse> {
+                fetchNewMovies()
+            })
+        } else {
+            toast(R.string.no_internet).show()
+        }
     }
 
     fun listenMovieDetails(movieId: Int) {
-        progressBar.visibility = View.VISIBLE
-        viewModel.fetchMovieDetails(movieId).observe(this, Observer<Movie> {
-            progressBar.visibility = View.GONE
-            if(it != null) {
-                startActivity<MovieDetailsActivity>(
-                        "title" to it.title,
-                        "overview" to it.overview,
-                        "genres" to it.genres?.joinToString(separator = ", ") { it.name },
-                        "backdropPath" to it.backdropPath,
-                        "posterPath" to it.posterPath,
-                        "release_date" to it.releaseDate
-                        )
-            }
-        })
+        if(isInternetAvailable(this)) {
+            ProgressDialog.show(this)
+            viewModel.fetchMovieDetails(movieId).observe(this, Observer<Movie> {
+                ProgressDialog.hide()
+                if(it != null) {
+                    startActivity<MovieDetailsActivity>(
+                            "title" to it.title,
+                            "overview" to it.overview,
+                            "genres" to it.genres?.joinToString(separator = ", ") { it.name },
+                            "backdropPath" to it.backdropPath,
+                            "posterPath" to it.posterPath,
+                            "release_date" to it.releaseDate
+                    )
+                }
+            })
+        } else {
+            toast(R.string.no_internet).show()
+        }
+
     }
 
 

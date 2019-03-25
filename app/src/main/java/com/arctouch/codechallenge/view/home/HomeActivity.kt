@@ -15,6 +15,7 @@ import com.arctouch.codechallenge.model.GenreResponse
 import com.arctouch.codechallenge.model.Movie
 import com.arctouch.codechallenge.repository.api.TmdbApi
 import com.arctouch.codechallenge.util.InternetBuilder.Companion.isInternetAvailable
+import com.arctouch.codechallenge.util.InternetUtil
 import com.arctouch.codechallenge.view.ProgressDialog
 import com.arctouch.codechallenge.view.movieDetails.MovieDetailsActivity
 import com.arctouch.codechallenge.viewModel.ViewModel
@@ -32,7 +33,7 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
     lateinit var api: TmdbApi
     lateinit var viewModel: ViewModel
     lateinit var linearManager: LinearLayoutManager
-    var listMovies : ArrayList<Movie> = ArrayList()
+    var listMovies: ArrayList<Movie> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,22 +47,23 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
     override fun onStart() {
         super.onStart()
         setupRecyclerView()
-        loadObservers()
+        listenMovieslist()
+//        loadObservers()
     }
 
     private fun setupRecyclerView() {
-        recyclerView.adapter = HomeAdapter(listMovies, listMovies,this, kodein.direct.instance())
+        recyclerView.adapter = HomeAdapter(listMovies, listMovies, this, kodein.direct.instance())
         linearManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearManager
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if(dy > 0) {
+                if (dy > 0) {
                     var visibleItemCount = linearManager.childCount
                     var totalItemCount = linearManager.itemCount
                     var pastVisibleItems = linearManager.findFirstCompletelyVisibleItemPosition()
 
-                    if(pastVisibleItems + visibleItemCount > totalItemCount) {
+                    if (pastVisibleItems + visibleItemCount > totalItemCount) {
                         fetchNewMovies()
                     }
                 }
@@ -105,7 +107,7 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun fetchNewMovies() {
-        if(isInternetAvailable(this)) {
+        if (InternetUtil(application).isInternetOn()) {
             ProgressDialog.show(this)
             viewModel.fetchMovies().observe(this, Observer<ArrayList<Movie>> {
                 ProgressDialog.hide()
@@ -121,7 +123,7 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun loadObservers() {
-        if(isInternetAvailable(this)) {
+        if (isInternetAvailable(this)) {
             viewModel.fetchGenres().observe(this, Observer<GenreResponse> {
                 fetchNewMovies()
             })
@@ -131,11 +133,11 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
     }
 
     fun listenMovieDetails(movieId: Int) {
-        if(isInternetAvailable(this)) {
+        if (InternetUtil(application).isInternetOn()) {
             ProgressDialog.show(this)
             viewModel.fetchMovieDetails(movieId).observe(this, Observer<Movie> {
                 ProgressDialog.hide()
-                if(it != null) {
+                if (it != null) {
                     startActivity<MovieDetailsActivity>(
                             "title" to it.title,
                             "overview" to it.overview,
@@ -149,7 +151,18 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
         } else {
             toast(R.string.no_internet).show()
         }
+    }
 
+    fun listenMovieslist() {
+        InternetUtil(application).observe(this, Observer { status ->
+            if (status!!) {
+                viewModel.fetchGenres().observe(this, Observer<GenreResponse> {
+                    fetchNewMovies()
+                })
+            } else {
+                toast(R.string.no_internet).show()
+            }
+        })
     }
 
 

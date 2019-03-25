@@ -11,8 +11,6 @@ class ViewModel(val genreRepository: GenreRepository, val movieRepository: Movie
 
     var currentPage: Long = 0
 
-    var movieDetails = MutableLiveData<Movie>()
-
     override fun onStart() {
 
     }

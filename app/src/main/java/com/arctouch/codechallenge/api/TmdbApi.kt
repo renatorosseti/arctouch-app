@@ -3,6 +3,7 @@ package com.arctouch.codechallenge.api
 import com.arctouch.codechallenge.model.GenreResponse
 import com.arctouch.codechallenge.model.Movie
 import com.arctouch.codechallenge.model.UpcomingMoviesResponse
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -22,7 +23,7 @@ interface TmdbApi {
     fun genres(
             @Query("api_key") apiKey: String,
             @Query("language") language: String
-    ): Single<GenreResponse>
+    ): Flowable<GenreResponse>
 
 
     @GET("movie/upcoming")
@@ -31,7 +32,7 @@ interface TmdbApi {
             @Query("language") language: String,
             @Query("page") page: Long,
             @Query("region") region: String
-    ): Single<UpcomingMoviesResponse>
+    ): Flowable<UpcomingMoviesResponse>
 
     @GET("movie/{id}")
     fun movie(

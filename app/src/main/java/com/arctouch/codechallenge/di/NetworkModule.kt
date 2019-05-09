@@ -1,9 +1,6 @@
 package com.arctouch.codechallenge.di
 
 import com.arctouch.codechallenge.api.TmdbApi
-import com.arctouch.codechallenge.data.AppRxSchedulers
-import com.arctouch.codechallenge.home.HomeContracts
-import com.arctouch.codechallenge.home.HomeInteractor
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

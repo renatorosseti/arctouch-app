@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.model.Movie
+import com.arctouch.codechallenge.viewModel.HomeViewModel
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -14,7 +15,7 @@ import javax.inject.Inject
 class HomeActivity : HomeContracts.View, DaggerAppCompatActivity() {
 
     @Inject
-    lateinit var presenter: HomePresenter
+    lateinit var viewModel: HomeViewModel
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -25,14 +26,10 @@ class HomeActivity : HomeContracts.View, DaggerAppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val fetchMoviesDisposable = presenter.fetchMoviesList()
-                .subscribe({ upCommingResponse ->
-                    showMovies(upCommingResponse.results)
-                }, { error ->
-                    Log.e("HomeActivity", "Occurred error on fetch movie list", error)
-                })
+        viewModel.fetchMovies().observe() -> {
 
-        addToCompositeDisposable(fetchMoviesDisposable)
+        } )
+
     }
 
     override fun showMovies(movies: List<Movie>) {

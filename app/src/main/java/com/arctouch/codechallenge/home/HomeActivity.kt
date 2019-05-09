@@ -1,5 +1,6 @@
 package com.arctouch.codechallenge.home
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -19,6 +20,8 @@ class HomeActivity : HomeContracts.View, DaggerAppCompatActivity() {
 
     private val compositeDisposable = CompositeDisposable()
 
+    private lateinit var listMovies: List<Movie>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
@@ -26,9 +29,12 @@ class HomeActivity : HomeContracts.View, DaggerAppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.fetchMovies().observe() -> {
-
-        } )
+        viewModel.fetchMovies().observe(this, Observer<List<Movie>> {
+            if (it != null) {
+                listMovies.addAll(it)
+                recyclerView.adapter.notifyDataSetChanged()
+            }
+        })
 
     }
 

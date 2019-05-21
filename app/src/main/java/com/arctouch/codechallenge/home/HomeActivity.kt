@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.model.Movie
+import com.arctouch.codechallenge.view.home.HomeViewState
 import com.arctouch.codechallenge.viewModel.HomeViewModel
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
@@ -29,9 +30,9 @@ class HomeActivity : HomeContracts.View, DaggerAppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.fetchMovies().observe(this, Observer<List<Movie>> {
+        viewModel.fetchMovies().observe(this, Observer<HomeViewState> {
             if (it != null) {
-                listMovies.addAll(it)
+                listMovies = it.movies
                 recyclerView.adapter.notifyDataSetChanged()
             }
         })

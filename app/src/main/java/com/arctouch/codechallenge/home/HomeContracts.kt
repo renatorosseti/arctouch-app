@@ -21,8 +21,4 @@ class HomeContracts {
         fun fetchMoviesData(): Single<UpcomingMoviesResponse>
     }
 
-    interface InteractorOutput {
-        fun onMoviesFetchedSuccess(movies: List<Movie>)
-        fun onMovieFetchedError()
-    }
 }

@@ -1,6 +1,6 @@
 package com.arctouch.codechallenge.di
 
-import com.arctouch.codechallenge.repository.Repository
+import com.arctouch.codechallenge.repository.HomeInteractor
 import com.arctouch.codechallenge.viewModel.HomeViewModel
 import dagger.Module
 import dagger.Provides
@@ -9,5 +9,5 @@ import dagger.Provides
 class HomeModelViewModule {
 
     @Provides
-    fun providesHomeModelView(repository: Repository) = HomeViewModel(repository)
+    fun providesHomeModelView(homeInteractor: HomeInteractor) = HomeViewModel(homeInteractor)
 }

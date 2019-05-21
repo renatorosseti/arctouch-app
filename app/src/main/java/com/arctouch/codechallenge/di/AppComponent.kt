@@ -9,6 +9,7 @@ import dagger.android.AndroidInjector
 @Singleton
 @Component(modules = [
     AndroidSupportInjectionModule::class,
+    AppModule::class,
     ActivityBuilder::class])
 interface AppComponent : AndroidInjector<ArctouchApp> {
 

@@ -2,7 +2,7 @@ package com.arctouch.codechallenge.di
 
 import dagger.Module
 
-@Module(includes = [BindOutputInteractor::class,
+@Module(includes = [
     HomeModelViewModule::class,
     SchedulerModule::class,
     BindActivityView::class,
